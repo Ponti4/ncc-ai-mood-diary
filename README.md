@@ -1,36 +1,106 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 🗓️ 기분 일기 — 국립암센터 AI 교육 실습 프로젝트
 
-## Getting Started
+> 이 프로젝트는 **국립암센터 AI 교육 과정**의 실습 자료입니다.  
+> AI(Claude)와 함께 코딩을 전혀 몰라도 웹 서비스를 만들 수 있음을 보여주는 예제입니다.
 
-First, run the development server:
+---
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+## 📖 이 프로젝트가 뭔가요?
+
+매일 **기분을 이모지로 기록**하고, **짧은 이야기를 여러 개 남길 수 있는 웹 일기장**입니다.
+
+| 기능 | 설명 |
+|------|------|
+| 📅 달력 | 이번 달 달력에서 날짜를 클릭해 기록을 확인 |
+| 😊 기분 선택 | 행복 / 좋음 / 보통 / 슬픔 / 힘듦 / 화남 중 하나 선택 |
+| 📝 이야기 | 하루에 여러 개의 짧은 메모를 남기고 수정·삭제 가능 |
+| 🗂️ 달력 표시 | 기록한 날에 기분 이모지가 달력에 자동으로 표시 |
+
+---
+
+## 🖥️ 실행 방법 (처음 하시는 분도 따라할 수 있어요!)
+
+### 1단계 — 준비물 설치
+
+아래 두 가지가 컴퓨터에 설치되어 있어야 합니다.
+
+- **Node.js** (무료 다운로드): https://nodejs.org  
+  → LTS 버전(왼쪽 버튼)을 설치하세요.
+
+### 2단계 — 프로젝트 다운로드
+
+이 페이지 오른쪽 위 초록색 **`<> Code`** 버튼 → **`Download ZIP`** 클릭 후 압축 해제
+
+또는 터미널(Mac: Terminal, Windows: PowerShell)에서:
+```
+git clone https://github.com/Ponti4/ncc-ai-mood-diary.git
+cd ncc-ai-mood-diary
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### 3단계 — 라이브러리 설치
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+터미널에서 프로젝트 폴더 안에서 아래 명령어를 실행하세요:
+```
+npm install
+```
+> 잠깐 기다리면 자동으로 필요한 것들이 설치됩니다.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+### 4단계 — 실행!
 
-## Learn More
+```
+npm run dev
+```
 
-To learn more about Next.js, take a look at the following resources:
+터미널에 `http://localhost:3000` 이 뜨면 성공!  
+웹 브라우저를 열고 주소창에 `http://localhost:3000` 을 입력하세요.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+---
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## 🛠️ 이 프로젝트에 사용된 기술 (쉽게 설명)
 
-## Deploy on Vercel
+| 기술 | 역할 | 비유 |
+|------|------|------|
+| **Next.js** | 웹 앱 전체 뼈대 | 건물의 골조 |
+| **React** | 화면 구성 | 인테리어 |
+| **Tailwind CSS** | 디자인 / 색상 | 페인트와 장식 |
+| **SQLite** | 데이터 저장 | 서랍 속 메모장 |
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+---
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## 🤖 AI와 함께 만든 프로젝트
+
+이 프로젝트는 **Anthropic의 Claude AI**와 대화하며 만들었습니다.  
+코딩 지식 없이도 AI에게 원하는 기능을 말로 설명하면 구현이 가능합니다.
+
+> "달력에서 날짜를 클릭하면 기분을 기록할 수 있게 해줘"  
+> → AI가 코드를 작성하고 실행까지 확인해줍니다.
+
+---
+
+## 📁 프로젝트 구조 (참고용)
+
+```
+simple-diary/
+├── src/
+│   ├── app/
+│   │   ├── [year]/[month]/   ← 달력 화면
+│   │   ├── diary/[date]/     ← 날짜별 기록 화면
+│   │   └── api/              ← 데이터 저장/불러오기
+│   └── lib/
+│       └── db.ts             ← 데이터베이스 연결
+└── data/                     ← 실제 일기 데이터 (비공개)
+```
+
+---
+
+## ❓ 자주 묻는 질문
+
+**Q. 내 일기 데이터가 인터넷에 올라가나요?**  
+A. 아니요! 일기 데이터(`data/` 폴더)는 GitHub에 올라가지 않도록 설정되어 있어요. 내 컴퓨터 안에만 저장됩니다.
+
+**Q. 실행이 안 돼요.**  
+A. Node.js가 제대로 설치되었는지 확인하고, `npm install`을 먼저 실행했는지 확인해보세요.
+
+---
+
+*국립암센터 AI 교육 과정 실습 자료 | Made with Claude AI*
