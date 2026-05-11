@@ -29,22 +29,22 @@ export default async function CalendarPage({
   const nextMonth = m === 12 ? { y: y + 1, m: 1 } : { y, m: m + 1 };
 
   return (
-    <div className="min-h-screen bg-amber-50 flex flex-col items-center py-10 px-4">
-      <div className="w-full max-w-lg bg-white rounded-2xl shadow-md p-6">
+    <div className="min-h-screen bg-green-50 flex flex-col items-center py-10 px-4">
+      <div className="w-full max-w-lg bg-green-100 rounded-2xl shadow-md p-6">
         {/* 헤더 */}
         <div className="flex items-center justify-between mb-6">
           <Link
             href={`/${prevMonth.y}/${pad(prevMonth.m)}`}
-            className="text-2xl text-amber-600 hover:text-amber-800 px-2"
+            className="text-2xl text-green-700 hover:text-green-900 px-2"
           >
             ‹
           </Link>
-          <h1 className="text-xl font-bold text-gray-800">
+          <h1 className="text-xl font-bold text-green-900">
             {y}년 {m}월
           </h1>
           <Link
             href={`/${nextMonth.y}/${pad(nextMonth.m)}`}
-            className="text-2xl text-amber-600 hover:text-amber-800 px-2"
+            className="text-2xl text-green-700 hover:text-green-900 px-2"
           >
             ›
           </Link>
@@ -56,7 +56,7 @@ export default async function CalendarPage({
             <div
               key={d}
               className={`text-center text-xs font-semibold py-1 ${
-                i === 0 ? "text-red-400" : i === 6 ? "text-blue-400" : "text-gray-400"
+                i === 0 ? "text-red-400" : i === 6 ? "text-blue-400" : "text-green-700"
               }`}
             >
               {d}
@@ -82,8 +82,8 @@ export default async function CalendarPage({
               <Link
                 key={dateStr}
                 href={`/diary/${dateStr}`}
-                className={`flex flex-col items-center py-2 rounded-xl transition-colors hover:bg-amber-100 ${
-                  isToday ? "bg-amber-200 font-bold" : ""
+                className={`flex flex-col items-center py-2 rounded-xl transition-colors hover:bg-green-200 ${
+                  isToday ? "bg-green-300 font-bold" : ""
                 }`}
               >
                 <span
@@ -92,7 +92,7 @@ export default async function CalendarPage({
                       ? "text-red-400"
                       : dayOfWeek === 6
                       ? "text-blue-400"
-                      : "text-gray-700"
+                      : "text-green-900"
                   }`}
                 >
                   {day}
@@ -100,7 +100,7 @@ export default async function CalendarPage({
                 {hasEntry && (
                   mood
                     ? <span className="text-base leading-none mt-0.5">{mood}</span>
-                    : <span className="mt-1 w-1.5 h-1.5 rounded-full bg-amber-500" />
+                    : <span className="mt-1 w-1.5 h-1.5 rounded-full bg-green-500" />
                 )}
               </Link>
             );
