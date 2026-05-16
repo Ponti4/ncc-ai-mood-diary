@@ -58,19 +58,22 @@ GitHub Releases: v1.0.0 ~ v1.3.0 발행됨. v1.4.0은 로컬 태그만.
 | 단계 | 내용 | 상태 |
 |------|------|------|
 | **1단계** | Auth.js 설치 + Google OAuth 연결 (`src/auth.ts`, `api/auth/[...nextauth]/route.ts`, `.env.local`) | ✅ 완료 (v1.4.0) |
-| **2단계** | 헤더에 로그인/로그아웃 UI (`src/app/layout.tsx`에 `auth()` + 서버 액션) | ⚠️ 코드는 완료, **실제 로그인 동작 안 함** (Google OAuth 401: invalid_client 디버깅 중) |
+| **2단계** | 헤더에 로그인/로그아웃 UI (`src/app/layout.tsx`에 `auth()` + 서버 액션) | ✅ 완료 (구글 로그인 실제 동작 확인) |
 | **3단계** | DB 코멘트 테이블에 `user_id`, `user_name` 컬럼 추가 (`src/lib/db.ts`) | ⏳ 대기 |
 | **4단계** | 코멘트 작성 시 유저 정보 저장 + 작성자 이름 표시 | ⏳ 대기 |
 | **5단계** | 코멘트 수정/삭제 권한 체크 (클라이언트 UI + 서버 API 이중 보호) | ⏳ 대기 |
 
-### 현재 막혀있는 이슈 (2단계 검증)
+### 해결된 이슈: 401 invalid_client (2026-05-16 해결)
 - **증상:** 로그인 버튼 클릭 → 구글 로그인 페이지에서 `Error 401: invalid_client`
-- **확인된 사항:**
-  - `.env.local`의 `GOOGLE_CLIENT_ID`, `GOOGLE_CLIENT_SECRET` 값은 구글 콘솔과 동일
-  - 승인된 리디렉션 URI: `http://localhost:3000/api/auth/callback/google` 정확히 등록됨
-  - 테스트 사용자에 dev.pontifex@gmail.com 추가됨
-  - 서버 재시작 여러 번 시도
-- **다음 시도할 것:** OAuth 클라이언트 삭제 후 새로 생성 권유 / OAuth 동의 화면 Branding·Audience·Data Access 모두 채워졌는지 재확인
+- **원인:** Auth.js v5는 환경변수를 자동으로 `AUTH_GOOGLE_ID` / `AUTH_GOOGLE_SECRET` 이름으로 찾는데, `.env.local`에는 `GOOGLE_CLIENT_ID` / `GOOGLE_CLIENT_SECRET`로 저장되어 있어 자격증명이 비어있는 채로 구글에 요청됨 → 구글이 401 거부
+- **해결:** `src/auth.ts`에서 환경변수 이름을 명시적으로 지정
+  ```typescript
+  Google({
+    clientId: process.env.GOOGLE_CLIENT_ID,
+    clientSecret: process.env.GOOGLE_CLIENT_SECRET,
+  })
+  ```
+- **다음에 비슷한 문제 보면:** Auth.js v4 → v5 마이그레이션 자료들이 인터넷에 많은데, v5는 환경변수 이름 규칙이 바뀌었음(`AUTH_<PROVIDER>_ID`). 의심스러우면 코드에 `process.env.XXX` 형태로 명시
 
 ---
 
