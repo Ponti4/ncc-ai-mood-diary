@@ -80,7 +80,7 @@ GitHub Releases: v1.0.0 ~ v1.3.0 발행됨. v1.4.0은 로컬 태그만.
 ## 📁 주요 파일 구조
 
 ```
-simple-diary/
+mood-diary/
 ├── src/
 │   ├── auth.ts                                    # NextAuth 설정 (Google provider)
 │   ├── app/
